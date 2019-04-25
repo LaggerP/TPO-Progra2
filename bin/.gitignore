@@ -1,8 +1,5 @@
-/.DS_Store
-/Api/
-/Api_es/
-/Aplicaciones/
-/Clases/
 /Implementaciones/
-/Utilidades/
-/bin/
+/Api/
+/Aplicaciones/
+/Api_es/
+/Metodos/

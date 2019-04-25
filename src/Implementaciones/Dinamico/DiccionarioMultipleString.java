@@ -5,7 +5,7 @@
 
 package Implementaciones.Dinamico;
 
-import Api.ConjuntoTDA;
+import Api.ConjuntoStringTDA;
 import Api.DiccionarioMultipleStringTDA;
 
 public class DiccionarioMultipleString implements DiccionarioMultipleStringTDA {
@@ -57,7 +57,7 @@ public class DiccionarioMultipleString implements DiccionarioMultipleStringTDA {
 	// retorna null si la clave no existe en la lista principal
 	private nodo buscarClave (String c) {
 		nodo actual = inicio;
-		while (actual != null && actual.clave != c)
+		while (actual != null && actual.clave.compareTo(c) != 0)
 			actual = actual.sig;
 		return actual;
 	}
@@ -65,7 +65,7 @@ public class DiccionarioMultipleString implements DiccionarioMultipleStringTDA {
 	// retorna null si el valor no existe en la lista secundaria
 	private nodoV buscarValor (nodoV inicioV, String nuevoDato) {
 		nodoV actual = inicioV;
-		while(actual!= null && actual.valor!= nuevoDato)
+		while(actual!= null && actual.valor.compareTo(nuevoDato)!= 0)
 			actual = actual.sig;
 		return actual;
 	}
@@ -78,17 +78,16 @@ public class DiccionarioMultipleString implements DiccionarioMultipleStringTDA {
 		}
 		else{
 			nodo aux = inicio;
-			while (aux.sig != null && aux.sig.clave != c)
+			while (aux.sig != null && aux.sig.clave.compareTo(c) != 0)
 				aux = aux.sig;
 			if(aux.sig != null)
 				aux.sig= aux.sig.sig;
 		}
 	}
-	
 
 	@Override
-	public ConjuntoTDA claves() {
-		ConjuntoTDA claves = new Conjunto();
+	public ConjuntoStringTDA claves() {
+		ConjuntoStringTDA claves = new ConjuntoString();
 		claves.InicializarConjunto();
 		nodo aux = inicio;
 		while (aux != null){
@@ -99,12 +98,12 @@ public class DiccionarioMultipleString implements DiccionarioMultipleStringTDA {
 	}
 
 	@Override
-	public ConjuntoTDA recuperar(String c) {
+	public ConjuntoStringTDA recuperar(String c) {
 		nodo n = inicio;
-		while (n != null && n.clave != c){
+		while (n != null && n.clave.compareTo(c) != 0){
 			n = n.sig;
 		}
-		ConjuntoTDA c1 = new Conjunto();
+		ConjuntoStringTDA c1 = new ConjuntoString();
 		c1.InicializarConjunto();
 		if(n != null){
 			nodoV aux = n.inicioV;

@@ -48,10 +48,4 @@ public class Conjunto implements ConjuntoTDA {
 			i++;
 		return !(i==ult);
 	}
-
-	@Override
-	public void Agregar(String clave) {
-		// TODO Auto-generated method stub
-		
-	}
 }

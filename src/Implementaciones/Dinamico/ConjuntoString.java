@@ -1,14 +1,19 @@
+/** 
+@Autores: 
+@Grupo: 
+**/
+
 package Implementaciones.Dinamico;
 
-import Api.ConjuntoTDA;
+import Api.ConjuntoStringTDA;
 
-public class Conjunto implements ConjuntoTDA {
-	
-	class nodo{
-		int valor;
+public class ConjuntoString implements ConjuntoStringTDA {
+
+	class nodo {
+		String valor;
 		nodo sig;
 	}
-	
+
 	nodo inicio;
 
 	@Override
@@ -17,28 +22,31 @@ public class Conjunto implements ConjuntoTDA {
 	}
 
 	@Override
-	public int Elegir() {
+	public String Elegir() {
 		return inicio.valor;
 	}
 
 	@Override
-	public void Sacar(int x) {
+	public void Sacar(String x) {
 		nodo actual = inicio, anterior = null;
-		while (actual != null && actual.valor != x){
+		while (actual != null && actual.valor.compareTo(x)!=0){
 			anterior = actual;
 			actual = actual.sig;
 		}
-		if(actual == null){
-			inicio = inicio.sig;
+		if (actual != null) {
+			if(anterior == null){
+				inicio = inicio.sig;
+			}
+			else{
+				anterior.sig = actual.sig;
+			}
 		}
-		else{
-			anterior.sig = actual.sig;
-		}
+		
 	}
 
 	@Override
-	public void Agregar(int x) {
-		if(!Pertenece(x)) {
+	public void Agregar(String x) {
+		if (!Pertenece(x)) {
 			nodo nuevo = new nodo();
 			nuevo.valor = x;
 			nuevo.sig = inicio;
@@ -52,9 +60,9 @@ public class Conjunto implements ConjuntoTDA {
 	}
 
 	@Override
-	public boolean Pertenece(int x) {
+	public boolean Pertenece(String x) {
 		nodo actual = inicio;
-		while(actual != null && actual.valor != x){
+		while (actual != null && actual.valor.compareTo(x)!=0) {
 			actual = actual.sig;
 		}
 		return (actual != null);

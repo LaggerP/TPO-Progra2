@@ -6,8 +6,6 @@
 
 package Api;
 
-import Clases.Info;
-
 public interface DiccionarioMultipleTDA {
 	/** 
 	 * @Tarea: 
