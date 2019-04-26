@@ -24,10 +24,10 @@ public class AppTPOGRUPAL {
 		// a. Cantidad de estaciones para cada una de las líneas
 		m.calcularCantidadEstaciones(cl, val, DM);
 		
-		// b. Porcentaje de estaciones que tienen estaciones de transferencia por cada
-		// línea
-		// c. Lista de estaciones de igual nombre, indicando a que línea de subte o tren
-		// pertenece
+		// b. Porcentaje de estaciones que tienen estaciones de transferencia por cada línea
+		
+		m.porcentajeEstacionesTransferencia();
+		// c. Lista de estaciones de igual nombre, indicando a que línea de subte o tren pertenece
 		// d. Lista de estaciones de transferencia en orden alfabético (nombre, línea a
 		// la cual pertenece) indicando cantidad de líneas posibles se puede combinar.
 	}

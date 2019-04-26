@@ -7,6 +7,7 @@ import java.io.IOException;
 import Api.DiccionarioMultipleStringTDA;
 import Clases.Info;
 
+
 /**
  * @Autores: plagger
  * @Grupo:
@@ -15,6 +16,7 @@ import Clases.Info;
 public class Entradas {
 
 	/**
+
 	 * @Tarea: CargarDMArch(). Se carga los datos existentes en los archivos en un
 	 *         diccionario multiple
 	 * @Parámetros: Diccionario destino
@@ -36,14 +38,19 @@ public class Entradas {
 				Info nuevo; // estructura de los datos a obtener
 				
 				// linea obtenida del archivo.
-				String linea;
+				String linea = "";
 				while ((linea = buffer.readLine()) != null) {
-					String[] valorObtenido = linea.split(";"); // metodo split separa el string cada vez que se encuentra el delimitador. En este caso ';'
+					String[] valorObtenido = linea.split(";", -1); // metodo split separa el string cada vez que se encuentra el delimitador. En este caso ';'
+																  // aunque este metodo al encontrarse con string vacios los elimina. Para evitar esto,
+																 // se coloca el -1 como limitador 
 					nuevo = new Info();
 					clave = archivos[i].substring(0,archivos[i].length()-4); //retorna el nombre del archivo sin la extension .csv
 					nuevo.sentido = valorObtenido[0];
 					nuevo.nombre = valorObtenido[1];
+					nuevo.lineaNombre = valorObtenido[2];
+					nuevo.estacionTransferencia = valorObtenido[3];
 					destino.agregar(clave, nuevo.nombre);
+					 
 				}
 				arch.close();
 			} catch (IOException e) {

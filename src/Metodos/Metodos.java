@@ -33,11 +33,15 @@ public class Metodos {
 			
 			//tener en cuenta que la cantidad de estaciones que se muestran
 			//son las totales dejando de lado las que se repiten.
-			System.out.print(" Cantidad de estaciones : " + cantEstaciones);
+			System.out.print(" Cantidad de estaciones: " + cantEstaciones);
 			System.out.println();
 			System.out.println();
 			cl.Sacar(claveUnitaria);
 			cantEstaciones = 0;
 		}
+	}
+	
+	public void porcentajeEstacionesTransferencia () {
+		
 	}
 }
