@@ -5,21 +5,21 @@
 
 package Implementaciones.Estatico;
 
-import Api.ColaTDA;
+import Api.ColaStringTDA;
 
-public class Cola implements ColaTDA {
+public class ColaString implements ColaStringTDA {
 	
-	private int [] v;
+	private String [] v;
 	private int ult;
 	
 	@Override
 	public void InicializarCola() {
 		ult = 0;
-		v = new int [100];
+		v = new String [100];
 	}
 
 	@Override
-	public void Acolar(int x) {
+	public void Acolar(String x) {
 		v[ult] = x;
 		ult++;
 	}
@@ -37,8 +37,7 @@ public class Cola implements ColaTDA {
 	}
 
 	@Override
-	public int Primero() {
+	public String Primero() {
 		return v[0];
 	}
-
 }

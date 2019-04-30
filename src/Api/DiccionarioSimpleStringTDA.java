@@ -1,12 +1,18 @@
 /** 
-@Autores: 
-@Grupo: 
+	@Autores: 
+	@Grupo: 
 **/
+
+/**
+ * @TDA: 
+ * @Definición: 
+ **/
 
 
 package Api;
 
-public interface ABBTDA {
+public interface DiccionarioSimpleStringTDA {
+	
 	/** 
 	 * @Tarea: 
 	 * @Parámetros: 
@@ -14,7 +20,8 @@ public interface ABBTDA {
 	 * @Precondición: 
 	 * @Postcondición: 
 	**/
-	void inicializarArbol();
+	void InicializarDiccionario();
+	
 	/** 
 	 * @Tarea: 
 	 * @Parámetros: 
@@ -22,7 +29,8 @@ public interface ABBTDA {
 	 * @Precondición: 
 	 * @Postcondición: 
 	**/
-	int raiz();
+	void Agregar(String clave, String valor);
+	
 	/** 
 	 * @Tarea: 
 	 * @Parámetros: 
@@ -30,7 +38,8 @@ public interface ABBTDA {
 	 * @Precondición: 
 	 * @Postcondición: 
 	**/
-	ABBTDA hijoIzq();
+	void Eliminar(String clave);
+	
 	/** 
 	 * @Tarea: 
 	 * @Parámetros: 
@@ -38,7 +47,8 @@ public interface ABBTDA {
 	 * @Precondición: 
 	 * @Postcondición: 
 	**/
-	ABBTDA hijoDer();
+	String Recuperar(String clave);
+	
 	/** 
 	 * @Tarea: 
 	 * @Parámetros: 
@@ -46,21 +56,5 @@ public interface ABBTDA {
 	 * @Precondición: 
 	 * @Postcondición: 
 	**/
-	void agregar (int x);
-	/** 
-	 * @Tarea: 
-	 * @Parámetros: 
-	 * @Devuelve: 
-	 * @Precondición: 
-	 * @Postcondición: 
-	**/
-	void eliminar (int x);
-	/** 
-	 * @Tarea: 
-	 * @Parámetros: 
-	 * @Devuelve: 
-	 * @Precondición: 
-	 * @Postcondición: 
-	**/
-	boolean arbolVacio();
+	ConjuntoStringTDA Claves();
 }

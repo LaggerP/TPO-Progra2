@@ -5,6 +5,7 @@ import java.io.FileReader;
 import java.io.IOException;
 
 import Api.DiccionarioMultipleStringTDA;
+import Api.DiccionarioSimpleStringTDA;
 import Clases.Info;
 
 
@@ -16,7 +17,6 @@ import Clases.Info;
 public class Entradas {
 
 	/**
-
 	 * @Tarea: CargarDMArch(). Se carga los datos existentes en los archivos en un
 	 *         diccionario multiple
 	 * @Parámetros: Diccionario destino
@@ -26,7 +26,7 @@ public class Entradas {
 	 * @Costo:
 	 **/
 
-	public void CargarDMArch(DiccionarioMultipleStringTDA destino) {
+	public void CargarDMArch(DiccionarioMultipleStringTDA destino, DiccionarioSimpleStringTDA destinoSimple) {
 		String[] archivos = { "Subte A.csv", "Subte B.csv", "Subte C.csv", "Subte D.csv", "Subte E.csv", "Subte H.csv", 
 				"Premetro.csv", "FCGSM.csv", "FCDFS.csv", "FCGBM - R.Tigre.csv", "FCGBM - R.JLSuarez.csv",
 				"FCGBM - R.Mitre.csv", "FCGU.csv" };
@@ -50,7 +50,7 @@ public class Entradas {
 					nuevo.lineaNombre = valorObtenido[2];
 					nuevo.estacionTransferencia = valorObtenido[3];
 					destino.agregar(clave, nuevo.nombre);
-					 
+					destinoSimple.Agregar(clave, nuevo.lineaNombre); //ejercicio 2b)
 				}
 				arch.close();
 			} catch (IOException e) {
