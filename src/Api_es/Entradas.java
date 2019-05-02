@@ -40,17 +40,24 @@ public class Entradas {
 				// linea obtenida del archivo.
 				String linea = "";
 				while ((linea = buffer.readLine()) != null) {
-					String[] valorObtenido = linea.split(";", -1); // metodo split separa el string cada vez que se encuentra el delimitador. En este caso ';'
-																  // aunque este metodo al encontrarse con string vacios los elimina. Para evitar esto,
-																 // se coloca el -1 como limitador 
+					String[] valorObtenido = linea.split(";", -1); 
+					// metodo split separa el string cada vez que se encuentra el delimitador. En este caso ';'
+					// aunque este metodo al encontrarse con string vacios los elimina. Para evitar esto,
+					// se coloca el -1 como limitador 
 					nuevo = new Info();
 					clave = archivos[i].substring(0,archivos[i].length()-4); //retorna el nombre del archivo sin la extension .csv
 					nuevo.sentido = valorObtenido[0];
 					nuevo.nombre = valorObtenido[1];
 					nuevo.lineaNombre = valorObtenido[2];
 					nuevo.estacionTransferencia = valorObtenido[3];
-					destino.agregar(clave, nuevo.nombre);
-					destinoSimple.Agregar(clave, nuevo.lineaNombre); //ejercicio 2b)
+					
+					if (nuevo.sentido.compareTo("")!=0) {
+						//si el sentido NO esta vacio se agrega al diccionario multiple.
+						destino.agregar(clave, nuevo.nombre);
+						destinoSimple.Agregar(clave, nuevo.lineaNombre); //ejercicio 2b)
+					}
+					
+					
 				}
 				arch.close();
 			} catch (IOException e) {
