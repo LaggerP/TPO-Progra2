@@ -23,17 +23,24 @@ public class AppTPOGRUPAL {
 		entrada.CargarDMArch(DM,DS);
 		Metodos m = new Metodos();
 
+		
+		System.out.println("<----EJERCICIO A---->");
 		// a. Cantidad de estaciones para cada una de las líneas
 		ConjuntoStringTDA cl = DM.claves(); // obtenemos el conjunto de claves de un diccionario multimple
 		m.calcularCantidadEstaciones(cl, DM);
 		
-		System.out.println("<----SIGUIENTE EJERCICIO---->");
+		System.out.println("<----EJERCICIO B---->");
 		
-		// b. Porcentaje de estaciones que tienen estaciones de transferencia por cada línea{“
+		// b. Porcentaje de estaciones que tienen estaciones de transferencia por cada línea
 		ConjuntoStringTDA cl2 = DS.Claves(); // obtenemos el conjunto de claves de un diccionario simple
 		m.porcentajeEstacionesTransferencia(DS, cl2);
 		
+		System.out.println("<----EJERCICIO C---->");
+		
 		// c. Lista de estaciones de igual nombre, indicando a que línea de subte o tren pertenece
+		m.listaEstacionesIgualNombre(DM);
+		
+		
 		// d. Lista de estaciones de transferencia en orden alfabético (nombre, línea a
 		// la cual pertenece) indicando cantidad de líneas posibles se puede combinar.
 	}

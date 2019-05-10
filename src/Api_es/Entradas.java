@@ -56,8 +56,6 @@ public class Entradas {
 						destino.agregar(clave, nuevo.nombre);
 						destinoSimple.Agregar(clave, nuevo.lineaNombre); //ejercicio 2b)
 					}
-					
-					
 				}
 				arch.close();
 			} catch (IOException e) {
