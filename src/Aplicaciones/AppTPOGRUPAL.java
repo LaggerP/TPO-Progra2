@@ -7,10 +7,8 @@ package Aplicaciones;
 
 import Api.ConjuntoStringTDA;
 import Api.DiccionarioMultipleStringTDA;
-import Api.DiccionarioSimpleStringTDA;
 import Api_es.Entradas;
 import Implementaciones.Dinamico.DiccionarioMultipleString;
-import Implementaciones.Dinamico.DiccionarioSimpleString;
 import Metodos.Metodos;
 
 public class AppTPOGRUPAL {
@@ -18,9 +16,9 @@ public class AppTPOGRUPAL {
 		Entradas entrada = new Entradas(); // carga de archivo
 		DiccionarioMultipleStringTDA DM = new DiccionarioMultipleString();
 		DM.inicializarDiccionario();
-		DiccionarioSimpleStringTDA DS = new DiccionarioSimpleString();
-		DS.InicializarDiccionario();
-		entrada.CargarDMArch(DM,DS);
+		DiccionarioMultipleStringTDA DM_porcentaje_estaciones = new DiccionarioMultipleString();
+		DM_porcentaje_estaciones.inicializarDiccionario();
+		entrada.CargarDMArch(DM,DM_porcentaje_estaciones);
 		Metodos m = new Metodos();
 
 		
@@ -32,8 +30,8 @@ public class AppTPOGRUPAL {
 		System.out.println("<----EJERCICIO B---->");
 		
 		// b. Porcentaje de estaciones que tienen estaciones de transferencia por cada línea
-		ConjuntoStringTDA cl2 = DS.Claves(); // obtenemos el conjunto de claves de un diccionario simple
-		m.porcentajeEstacionesTransferencia(DS, cl2);
+		ConjuntoStringTDA cl2 = DM_porcentaje_estaciones.claves(); // obtenemos el conjunto de claves de un diccionario simple
+		m.porcentajeEstacionesTransferencia(DM, DM_porcentaje_estaciones, cl2);
 		
 		System.out.println("<----EJERCICIO C---->");
 		

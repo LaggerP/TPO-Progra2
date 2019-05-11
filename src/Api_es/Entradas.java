@@ -5,7 +5,6 @@ import java.io.FileReader;
 import java.io.IOException;
 
 import Api.DiccionarioMultipleStringTDA;
-import Api.DiccionarioSimpleStringTDA;
 import Clases.Info;
 
 
@@ -26,7 +25,7 @@ public class Entradas {
 	 * @Costo:
 	 **/
 
-	public void CargarDMArch(DiccionarioMultipleStringTDA destino, DiccionarioSimpleStringTDA destinoSimple) {
+	public void CargarDMArch(DiccionarioMultipleStringTDA destino, DiccionarioMultipleStringTDA destinoPorcentajeEstaciones) {
 		String[] archivos = { "Subte A.csv", "Subte B.csv", "Subte C.csv", "Subte D.csv", "Subte E.csv", "Subte H.csv", 
 				"Premetro.csv", "FCGSM.csv", "FCDFS.csv", "FCGBM - R.Tigre.csv", "FCGBM - R.JLSuarez.csv",
 				"FCGBM - R.Mitre.csv", "FCGU.csv" };
@@ -54,7 +53,10 @@ public class Entradas {
 					if (nuevo.sentido.compareTo("")!=0) {
 						//si el sentido NO esta vacio se agrega al diccionario multiple.
 						destino.agregar(clave, nuevo.nombre);
-						destinoSimple.Agregar(clave, nuevo.lineaNombre); //ejercicio 2b)
+						if (nuevo.lineaNombre.compareTo("")!=0) {
+							destinoPorcentajeEstaciones.agregar(clave, nuevo.lineaNombre); //ejercicio 2b)
+						}
+						
 					}
 				}
 				arch.close();
