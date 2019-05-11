@@ -38,10 +38,12 @@ public class AppTPOGRUPAL {
 		System.out.println("<----EJERCICIO C---->");
 		
 		// c. Lista de estaciones de igual nombre, indicando a que línea de subte o tren pertenece
-		m.listaEstacionesIgualNombre(DM);
+		//m.listaEstacionesIgualNombre(DM);
 		
+		System.out.println("<----EJERCICIO D---->");
 		
 		// d. Lista de estaciones de transferencia en orden alfabético (nombre, línea a
-		// la cual pertenece) indicando cantidad de líneas posibles se puede combinar.
+		// la cual pertenece) indicando cantidad de lineas posibles se puede combinar.
+		//m.ordenarListaTransferencia(DM,DS);
 	}
 }

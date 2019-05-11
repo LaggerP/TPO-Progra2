@@ -56,6 +56,7 @@ public class Metodos {
 	 * @PostcondiciÃ³n:
 	 * @Costo:
 	 **/
+	//NO DA EL PORCENTAJE--------ver
 	public void porcentajeEstacionesTransferencia(DiccionarioSimpleStringTDA DS, ConjuntoStringTDA cl2) {
 		ColaStringTDA colaDeValores = new ColaString();
 		colaDeValores.InicializarCola();
@@ -81,9 +82,13 @@ public class Metodos {
 	 * @PostcondiciÃ³n:
 	 * @Costo:
 	 **/
+	//NO COMPARA ESTACIONES, intentado pero fallido -------ver 
 	public void listaEstacionesIgualNombre(DiccionarioMultipleStringTDA DM) {
 		ConjuntoStringTDA clavesLineas = null;
+		ConjuntoStringTDA clavesLineas2 = null;
+		ConjuntoStringTDA clavesLineas3 = null;
 		ConjuntoStringTDA valoresEstaciones = null;
+		
 		ConjuntoStringTDA est = null;
 
 		DiccionarioSimpleStringTDA estacionesCoincidentesDS = new DiccionarioSimpleString();
@@ -92,29 +97,45 @@ public class Metodos {
 		String claveTemp = null;
 		String lin = null;
 		String x = null;
+		String a=null;
 
-		clavesLineas = DM.claves(); // clavesLineas = lineas de subte/tren
-		claveTemp = clavesLineas.Elegir();
-		valoresEstaciones = DM.recuperar(claveTemp); // valoresEstaciones = estaciones de esa linea
-		clavesLineas.Sacar(claveTemp); // saco la linea del conjunto de claves (EJ: saco subte A)
+		/* INTENTÉ HACER DOS COPIAS DEL CONJUNTO CLAVESLINEAS
+		 * LUEGO, ARMAR EL SIGUIENTE WHILE Y PONERLO EN ESTE LUGAR:		 * 
+		 * while(!clavesLineas3.ConjuntoVacio())
+		 * REEMPLACE TODOS LOS ANTERIORES "CLAVESLINEAS" POR "CLAVESLINEAS2"
+		 * LUEGO, ANTES DE CERRAR EL WHILE, PONER:
+		 * clavesLineas3.Sacar(claveTemp);
+		 * 
+		 * */
+		clavesLineas=DM.claves();
+		clavesLineas2=DM.claves();
+		clavesLineas3=DM.claves();
 
-		while (!clavesLineas.ConjuntoVacio()) { // hasta que pase por todas las lineas
-			lin = clavesLineas.Elegir(); // saco una linea
-			est = DM.recuperar(lin); // guardo sus estaciones en un conjunto "est"
-
-			while (!est.ConjuntoVacio()) { // mientras est tenga estaciones
-				x = est.Elegir(); // saco una estacion al azar
-				if (valoresEstaciones.Pertenece(x)) { // si pertenece al conjunto que guarde en un principio (EJ: subte A)
-					String lineaCoincidente = claveTemp + " con " +  lin;
-					estacionesCoincidentesDS.Agregar(lineaCoincidente, x); // guardo en un DS la linea de subte a la que pertenece y la estacion
-				}
-				est.Sacar(x); // saco la estacion del conjunto
-			}
-			clavesLineas.Sacar(lin); // elimino esa linea. una linea menos para recorrer.
-		}
-		mostrarDiccionarioSimple(estacionesCoincidentesDS);
-	}
+		
+		while(!clavesLineas3.ConjuntoVacio()){
+			clavesLineas2 = DM.claves(); // clavesLineas = lineas de subte/tren
+			claveTemp = clavesLineas2.Elegir();
+			valoresEstaciones = DM.recuperar(claveTemp); // valoresEstaciones = estaciones de esa linea
+			clavesLineas2.Sacar(claveTemp); // saco la linea del conjunto de claves (EJ: saco subte A)
 	
+			while (!clavesLineas2.ConjuntoVacio()) { // hasta que pase por todas las lineas
+				lin = clavesLineas2.Elegir(); // saco una linea
+				est = DM.recuperar(lin); // guardo sus estaciones en un conjunto "est"
+	
+				while (!est.ConjuntoVacio()) { // mientras est tenga estaciones
+					x = est.Elegir(); // saco una estacion al azar
+					if (valoresEstaciones.Pertenece(x)) { // si pertenece al conjunto que guarde en un principio (EJ: subte A)
+						String lineaCoincidente = claveTemp + " con " +  lin;
+						estacionesCoincidentesDS.Agregar(lineaCoincidente, x); // guardo en un DS la linea de subte a la que pertenece y la estacion
+					}
+					est.Sacar(x); // saco la estacion del conjunto
+				}
+				clavesLineas2.Sacar(lin); // elimino esa linea. una linea menos para recorrer.
+			}
+			mostrarDiccionarioSimple(estacionesCoincidentesDS);
+			}
+		clavesLineas3.Sacar(claveTemp);
+		}
 	
 	private void mostrarDiccionarioSimple(DiccionarioSimpleStringTDA DS) {
 		ConjuntoStringTDA clavesLineas = DS.Claves();
@@ -127,4 +148,49 @@ public class Metodos {
 		}
 	}
 
+	/**
+	 * @Tarea: ordenarListaTransferencia().
+	 * @Parametros:DiccionarioMultipleStringTDA DM, DiccionarioSimpleStringTDA DS
+	 * @Devuelve: 
+	 * @Precondicion:
+	 * @Postcondicion:
+	 * @Costo:
+	 **/
+	
+	/*d.	Lista de estaciones de transferencia en orden alfabético 
+	 * (nombre, línea a la cual pertenece)  
+	 * indicando cantidad de líneas posibles se puede combinar.*/
+	
+	
+	public void ordenarListaTransferencia(DiccionarioMultipleStringTDA DM, DiccionarioSimpleStringTDA DS){
+		ConjuntoStringTDA estaciones = null;
+		ConjuntoStringTDA estaciones2 = null;
+		ConjuntoStringTDA linea = null;
+
+		String a=null;
+		String b=null;
+		String c=null;
+		estaciones=DM.claves();
+		estaciones2=DM.claves();
+
+		while(!estaciones.ConjuntoVacio()){
+			a=estaciones.Elegir();
+			linea=DM.recuperar(a);
+			
+			while (!linea.ConjuntoVacio()){
+				b=linea.Elegir();
+				c=linea.Elegir();				
+				
+				//COMO COMPARAR???  ------ a partir de aca, fruta:
+				
+					//if b > c
+						//DS.Agregar(a, c);
+						//linea.Sacar(c);
+					//else if c > b
+						//DS.Agregar(a, b);
+						//linea.Sacar(b);
+					
+			}
+		}		
+	}
 }
