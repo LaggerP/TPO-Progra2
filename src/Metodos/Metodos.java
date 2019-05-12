@@ -100,68 +100,40 @@ public class Metodos {
 	 * @Postcondicion:
 	 * @Costo:
 	 **/
-	// NO COMPARA ESTACIONES, intentado pero fallido -------ver
 
-
-
-	@SuppressWarnings("null")
 	public void listaEstacionesIgualNombre(DiccionarioMultipleStringTDA DM) {
-		ConjuntoStringTDA clavesLineas = null;
-		ConjuntoStringTDA clavesLineas2 = null;
-		ConjuntoStringTDA valoresEstaciones = null;
-		ConjuntoStringTDA valoresEstacionesComp = null;
+		
+		ConjuntoStringTDA clavesAux = DM.claves();
+		ConjuntoStringTDA clavesLineas = DM.claves();
+		ConjuntoStringTDA clavesLineas2 = DM.claves();
 
 		DiccionarioMultipleStringTDA estacionesCoincidentesDM = new DiccionarioMultipleString();
 		estacionesCoincidentesDM.inicializarDiccionario();
 
-		String claveTemp = null;
-		String claveComparacion = null;
-		String estacionTemp = null;
-		
-		clavesLineas = DM.claves();
-					
-		String valor;
-		int cant = 0;
-		while (!clavesLineas.ConjuntoVacio()) {
-			valor = clavesLineas.Elegir();
-			clavesLineas.Sacar(valor);
-			cant++;
-		}
-		
-		clavesLineas = DM.claves();	
-		clavesLineas2 = DM.claves();
-
-		while (cant!=0) {
+		while(!clavesAux.ConjuntoVacio()) {
+			String clave = clavesLineas.Elegir(); //elegimos una clave del primer diccionario
+			clavesLineas.Sacar(clave); //sacamos la clave de ese diccionario
+			ConjuntoStringTDA valores = DM.recuperar(clave); //recuperamos los valores asociados a ese clave del primer diccionario
 			
-			System.out.println("LINEAS RESTANTES: " + cant);
-			System.out.println("ANTERIOR: "+claveTemp);
-			claveTemp = clavesLineas.Elegir(); // subte A
-			
-			System.out.println("ACTUAL: " + claveTemp);
-			clavesLineas.Sacar(claveTemp); // saco subte A del conjunto
-			while (!clavesLineas.ConjuntoVacio()) {
+			clavesLineas2.Sacar(clave); //eliminamos la clave en el segundo diccionario para no comparar con mismos valores
+			while(!clavesLineas2.ConjuntoVacio()) {
+				String clave2 = clavesLineas2.Elegir(); //elegimos una clave del segundo diccionario
+				ConjuntoStringTDA valores2 = DM.recuperar(clave2); //recuperamos el conjunto de valores asociados a la clave del segundo diccionario
 				
-				claveComparacion = clavesLineas.Elegir(); // tren mitre
-				valoresEstaciones = DM.recuperar(claveTemp); // retiro moreno diagonal
-				valoresEstacionesComp = DM.recuperar(claveComparacion); // retiro belgrano martinez
-				while (!valoresEstacionesComp.ConjuntoVacio()) {
-					estacionTemp = valoresEstacionesComp.Elegir(); // retiro
-					if (valoresEstaciones.Pertenece(estacionTemp)) { // si
-						String lineaCoincidente = claveTemp + " con " + claveComparacion;
-						estacionesCoincidentesDM.agregar(lineaCoincidente, estacionTemp);
+				while(!valores2.ConjuntoVacio()) {
+					String valor2 = valores2.Elegir(); //elegimos un valor del conjunto de valores de una clave del segundo diccionario
+					if(valores.Pertenece(valor2)) { //si el valor que elegimos esta en el conjunto de valores de una clave del primer diccionario, lo guardamos
+						String lineaCoincidente = clave + " con " + clave2;
+						estacionesCoincidentesDM.agregar(lineaCoincidente, valor2);
 					}
-					valoresEstacionesComp.Sacar(estacionTemp); // saco retiro y pruebo con moreno...
+					valores2.Sacar(valor2); //sacamos el valor del conjunto de valores del segundo diccionario
 				}
-				clavesLineas.Sacar(claveComparacion); // Se va el tren mitre		
-			}	
-			mostrarDiccionarioMultiple(estacionesCoincidentesDM);
-			
-			clavesLineas2.Sacar(claveTemp); 			
-			clavesLineas=clavesLineas2;		// ????????????????????
-			
-			cant--;
-			System.out.println("----------------------------------------------------------");
+				clavesLineas2.Sacar(clave2); //sacamos la clave del segundo diccionario
+			}
+			clavesLineas2 = DM.claves(); //volvemos completar con TODAS las claves al segundo diccionario
+			clavesAux.Sacar(clave); //eliminamos la clave que usamos para comparar del conjunto de claves que funciona como flag.
 		}
+		mostrarDiccionarioMultiple(estacionesCoincidentesDM);
 	}
 
 	private void mostrarDiccionarioMultiple(DiccionarioMultipleStringTDA DM) {
@@ -172,25 +144,12 @@ public class Metodos {
 			ConjuntoStringTDA estaciones = DM.recuperar(clave);
 			while(!estaciones.ConjuntoVacio()) {
 				String estacion = estaciones.Elegir();
-				System.out.println("Lineas que coinciden: " + clave + "[]");
-				System.out.println("Nombre de estacion: " + estacion);
+				System.out.println("Coinciden: " + clave + " Nombre de estacion: " + estacion);
+				System.out.println();
 				estaciones.Sacar(estacion);
 			}
 		}
 	}
-
-	
-	static int cardinalidadConjunto(ConjuntoStringTDA clavesLineas) {
-		int cant = 0;
-		String valor;
-		while (!clavesLineas.ConjuntoVacio()) {
-			valor = clavesLineas.Elegir();
-			clavesLineas.Sacar(valor);
-			cant++;
-		}
-		return cant;
-	}
-	
 	
 	/**
 	 * @Tarea: ordenarListaTransferencia().
