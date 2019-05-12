@@ -9,8 +9,8 @@ import Clases.Info;
 
 
 /**
- * @Autores: plagger
- * @Grupo:
+ * @Autores: plagger, ncheheid
+ * @Grupo: 2
  **/
 
 public class Entradas {
@@ -18,9 +18,9 @@ public class Entradas {
 	/**
 	 * @Tarea: CargarDMArch(). Se carga los datos existentes en los archivos en un
 	 *         diccionario multiple
-	 * @Parámetros: Diccionario destino
-	 * @Devuelve:
-	 * @Precondición:
+	 * @Parámetros: Diccionario destino y Diccionario destinoPorcentajeEstaciones
+	 * @Devuelve: Diccionarios multiples con información obtenida de los archivos
+	 * @Precondición: Que existan los diccionarios multiples
 	 * @Postcondición:
 	 * @Costo:
 	 **/
@@ -56,7 +56,6 @@ public class Entradas {
 						if (nuevo.lineaNombre.compareTo("")!=0) {
 							destinoPorcentajeEstaciones.agregar(clave, nuevo.lineaNombre); //ejercicio 2b)
 						}
-						
 					}
 				}
 				arch.close();

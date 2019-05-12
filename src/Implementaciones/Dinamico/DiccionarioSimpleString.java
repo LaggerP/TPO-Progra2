@@ -1,6 +1,6 @@
 /** 
-@Autores: 
-@Grupo: 
+@Autores: plagger, ncheheid, afierro
+@Grupo: 2
 **/
 
 package Implementaciones.Dinamico;
@@ -9,19 +9,20 @@ import Api.ConjuntoStringTDA;
 import Api.DiccionarioSimpleStringTDA;
 
 public class DiccionarioSimpleString implements DiccionarioSimpleStringTDA {
-	
-	class NodoCl{
+
+	class NodoCl {
 		String clave;
 		String valor;
 		NodoCl sigCl;
 	}
+
 	NodoCl iniCl;
 
 	@Override
 	public void InicializarDiccionario() {
 		iniCl = null;
 	}
-	
+
 	@Override
 	public void Agregar(String c, String valor) {
 		NodoCl nuevo;
@@ -29,10 +30,10 @@ public class DiccionarioSimpleString implements DiccionarioSimpleStringTDA {
 		nuevo.clave = c;
 		nuevo.valor = valor;
 		NodoCl aux = iniCl;
-		while(aux!= null && aux.clave.compareTo(c)!=0){
+		while (aux != null && aux.clave.compareTo(c) != 0) {
 			aux = aux.sigCl;
 		}
-		if(aux==null){
+		if (aux == null) {
 			nuevo.sigCl = iniCl;
 			iniCl = nuevo;
 		}
@@ -40,16 +41,15 @@ public class DiccionarioSimpleString implements DiccionarioSimpleStringTDA {
 
 	@Override
 	public void Eliminar(String c) {
-		if(iniCl != null){
-			if(iniCl.clave == c){
+		if (iniCl != null) {
+			if (iniCl.clave == c) {
 				iniCl = iniCl.sigCl;
-			}
-			else{
+			} else {
 				NodoCl aux = iniCl;
-				while (aux.sigCl != null && aux.sigCl.clave.compareTo(c) != 0){
+				while (aux.sigCl != null && aux.sigCl.clave.compareTo(c) != 0) {
 					aux = aux.sigCl;
 				}
-				if(aux.sigCl != null) {
+				if (aux.sigCl != null) {
 					aux.sigCl = aux.sigCl.sigCl;
 				}
 			}
@@ -59,7 +59,7 @@ public class DiccionarioSimpleString implements DiccionarioSimpleStringTDA {
 	@Override
 	public String Recuperar(String c) {
 		NodoCl claveBuscada = iniCl;
-		while (claveBuscada != null && claveBuscada.clave.compareTo(c) != 0){
+		while (claveBuscada != null && claveBuscada.clave.compareTo(c) != 0) {
 			claveBuscada = claveBuscada.sigCl;
 		}
 		return claveBuscada.valor;
@@ -70,7 +70,7 @@ public class DiccionarioSimpleString implements DiccionarioSimpleStringTDA {
 		ConjuntoStringTDA claves = new ConjuntoString();
 		claves.InicializarConjunto();
 		NodoCl actual = iniCl;
-		while(actual != null){
+		while (actual != null) {
 			claves.Agregar(iniCl.clave);
 			actual = actual.sigCl;
 		}

@@ -1,6 +1,6 @@
 /** 
-@Autores: 
-@Grupo: 
+@Autores: plagger, ncheheid, afierro
+@Grupo: 2
 **/
 
 package Implementaciones.Dinamico;
@@ -29,19 +29,17 @@ public class ConjuntoString implements ConjuntoStringTDA {
 	@Override
 	public void Sacar(String x) {
 		nodo actual = inicio, anterior = null;
-		while (actual != null && actual.valor.compareTo(x)!=0){
+		while (actual != null && actual.valor.compareTo(x) != 0) {
 			anterior = actual;
 			actual = actual.sig;
 		}
 		if (actual != null) {
-			if(anterior == null){
+			if (anterior == null) {
 				inicio = inicio.sig;
-			}
-			else{
+			} else {
 				anterior.sig = actual.sig;
 			}
 		}
-		
 	}
 
 	@Override
@@ -62,7 +60,7 @@ public class ConjuntoString implements ConjuntoStringTDA {
 	@Override
 	public boolean Pertenece(String x) {
 		nodo actual = inicio;
-		while (actual != null && actual.valor.compareTo(x)!=0) {
+		while (actual != null && actual.valor.compareTo(x) != 0) {
 			actual = actual.sig;
 		}
 		return (actual != null);

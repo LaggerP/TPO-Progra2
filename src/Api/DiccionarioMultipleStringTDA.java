@@ -1,7 +1,13 @@
 /** 
- * @Autores: plagger
- * @Grupo: 
+ * @Autores: plagger, ncheheid, afierro
+ * @Grupo: 2
 **/
+/**
+ * @TDA: DiccionarioMultipleStringTDA
+ * @Definición: estructura de datos diccionario multiple se caracteriza porque cada valor
+ * ingresa a la estructura asociado a una clave, y estas claves existen siempre que
+ * tengan valor asociado y son unicas. Cada clave puede tener multiples valores
+ **/
 
 package Api;
 
@@ -19,14 +25,14 @@ public interface DiccionarioMultipleStringTDA {
 	/**
 	 * @Tarea: Agrego una clave con su o sus valores al diccionario
 	 * @Parámetros: Diccionario, clave y valor
-	 * @Devuelve: Diccinario con una clave con su valor mas
+	 * @Devuelve: Diccinario con una clave con su valor
 	 * @Precondición: Que el diccionario este inicializado
 	 * @Postcondición:
 	 **/
 	void agregar(String clave, String dato);
 
 	/**
-	 * @Tarea: Elimino una clave y su valor del diccionario
+	 * @Tarea: Elimino una clave y su valores del diccionario
 	 * @Parámetros: Diccionario y clave
 	 * @Devuelve: Diccionario con un valor menos
 	 * @Precondición: Que el diccionario este inicializado
@@ -56,7 +62,8 @@ public interface DiccionarioMultipleStringTDA {
 	 * @Tarea: Elimino un elemento de la clave del diccionario
 	 * @Parámetros: Diccionario, clave y valor
 	 * @Devuelve: Diccionario con un valor menos de una clave
-	 * @Precondición: Que el diccionario este inicializado y tenga valores existentes
+	 * @Precondición: Que el diccionario este inicializado y tenga valores
+	 *                existentes
 	 * @Postcondición:
 	 **/
 	void EliminarElem(String c, String dato);

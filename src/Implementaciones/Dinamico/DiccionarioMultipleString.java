@@ -1,6 +1,6 @@
 /** 
-@Autores: 
-@Grupo: 
+@Autores: plagger, ncheheid, afierro
+@Grupo: 2
 **/
 
 package Implementaciones.Dinamico;
@@ -9,20 +9,20 @@ import Api.ConjuntoStringTDA;
 import Api.DiccionarioMultipleStringTDA;
 
 public class DiccionarioMultipleString implements DiccionarioMultipleStringTDA {
-	
-	class nodo{
+
+	class nodo {
 		String clave;
 		nodoV inicioV;
 		nodo sig;
 	}
-	
-	class nodoV{
-		String valor; 
+
+	class nodoV {
+		String valor;
 		nodoV sig;
 	}
 
 	nodo inicio;
-	
+
 	@Override
 	public void inicializarDiccionario() {
 		inicio = null;
@@ -30,11 +30,11 @@ public class DiccionarioMultipleString implements DiccionarioMultipleStringTDA {
 
 	@Override
 	public void agregar(String c, String nuevoDato) {
-		
+
 		// insertando valores que no estan
 		// en la lista primaria (lista de claves)
 		nodo posCl = buscarClave(c);
-		if(posCl == null) { //si no hay nodos cargados
+		if (posCl == null) { // si no hay nodos cargados
 			nodo nuevoCl = new nodo();
 			nuevoCl.clave = c;
 			nuevoCl.inicioV = null;
@@ -42,7 +42,7 @@ public class DiccionarioMultipleString implements DiccionarioMultipleStringTDA {
 			inicio = nuevoCl;
 			posCl = inicio;
 		}
-		
+
 		// insertando aquellos valores que no estan
 		// en la lista secundaria (lista de valores)
 		nodoV posVal = buscarValor(posCl.inicioV, nuevoDato);
@@ -53,9 +53,9 @@ public class DiccionarioMultipleString implements DiccionarioMultipleStringTDA {
 			posCl.inicioV = nuevo;
 		}
 	}
-	
+
 	// retorna null si la clave no existe en la lista principal
-	private nodo buscarClave (String c) {
+	private nodo buscarClave(String c) {
 		nodo actual = inicio;
 		while (actual != null && actual.clave.compareTo(c) != 0)
 			actual = actual.sig;
@@ -63,25 +63,24 @@ public class DiccionarioMultipleString implements DiccionarioMultipleStringTDA {
 	}
 
 	// retorna null si el valor no existe en la lista secundaria
-	private nodoV buscarValor (nodoV inicioV, String nuevoDato) {
+	private nodoV buscarValor(nodoV inicioV, String nuevoDato) {
 		nodoV actual = inicioV;
-		while(actual!= null && actual.valor.compareTo(nuevoDato)!= 0)
+		while (actual != null && actual.valor.compareTo(nuevoDato) != 0)
 			actual = actual.sig;
 		return actual;
 	}
-	
+
 	@Override
 	public void eliminar(String c) {
-		if(inicio != null){
-			if(inicio.clave == c)
+		if (inicio != null) {
+			if (inicio.clave == c)
 				inicio = inicio.sig;
-		}
-		else{
+		} else {
 			nodo aux = inicio;
 			while (aux.sig != null && aux.sig.clave.compareTo(c) != 0)
 				aux = aux.sig;
-			if(aux.sig != null)
-				aux.sig= aux.sig.sig;
+			if (aux.sig != null)
+				aux.sig = aux.sig.sig;
 		}
 	}
 
@@ -90,7 +89,7 @@ public class DiccionarioMultipleString implements DiccionarioMultipleStringTDA {
 		ConjuntoStringTDA claves = new ConjuntoString();
 		claves.InicializarConjunto();
 		nodo aux = inicio;
-		while (aux != null){
+		while (aux != null) {
 			claves.Agregar(aux.clave);
 			aux = aux.sig;
 		}
@@ -100,14 +99,14 @@ public class DiccionarioMultipleString implements DiccionarioMultipleStringTDA {
 	@Override
 	public ConjuntoStringTDA recuperar(String c) {
 		nodo n = inicio;
-		while (n != null && n.clave.compareTo(c) != 0){
+		while (n != null && n.clave.compareTo(c) != 0) {
 			n = n.sig;
 		}
 		ConjuntoStringTDA c1 = new ConjuntoString();
 		c1.InicializarConjunto();
-		if(n != null){
+		if (n != null) {
 			nodoV aux = n.inicioV;
-			while (aux != null){
+			while (aux != null) {
 				c1.Agregar(aux.valor);
 				aux = aux.sig;
 			}
@@ -118,24 +117,24 @@ public class DiccionarioMultipleString implements DiccionarioMultipleStringTDA {
 	@Override
 	public void EliminarElem(String c, String dato) {
 		nodo posCl = buscarClave(c);
-		if (posCl != null) { //si la clave existe
+		if (posCl != null) { // si la clave existe
 			nodoV anterior = null, actual = posCl.inicioV;
-			
-			//avance en la lista secundaria
+
+			// avance en la lista secundaria
 			while (actual != null && actual.valor != dato) {
 				anterior = actual;
 				actual = actual.sig;
 			}
 			if (actual != null)
 				// si el valor a eliminar esta en el primer nodo de la lista
-				if (anterior == null) 
+				if (anterior == null)
 					posCl.inicioV = posCl.inicioV.sig;
 				// si el valor a eliminar esta entre dos nodos de la lista
 				else
 					anterior.sig = actual.sig;
-				// en el caso de que exista un solo valor asociado a la clave
-				if (posCl.inicioV == null)
-					eliminar(c);
+			// en el caso de que exista un solo valor asociado a la clave
+			if (posCl.inicioV == null)
+				eliminar(c);
 		}
 	}
 

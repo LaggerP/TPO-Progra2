@@ -6,9 +6,9 @@
 package Metodos;
 
 import Api.ConjuntoStringTDA;
-import Api.ConjuntoTDA;
 import Api.DiccionarioMultipleStringTDA;
 import Api.DiccionarioSimpleStringTDA;
+import Implementaciones.Dinamico.DiccionarioMultipleString;
 import Implementaciones.Dinamico.DiccionarioSimpleString;
 
 public class Metodos {
@@ -70,9 +70,10 @@ public class Metodos {
 			}
 			int cantLineasTotal = calculoTotalEstacionesPorLinea(DM, claveObtenida);
 			float porcentaje = ((cant * 100) / cantLineasTotal);
-			System.out.println("Porcentaje de estaciones de transferencia de la linea: "+ claveObtenida + " es " + porcentaje +"%");
+			System.out.println("Porcentaje de estaciones de transferencia de la linea: " + claveObtenida + " es "
+					+ porcentaje + "%");
 			cl2.Sacar(claveObtenida);
-			cant =0;
+			cant = 0;
 		}
 	}
 
@@ -89,8 +90,6 @@ public class Metodos {
 		return cantEstaciones;
 	}
 
-	
-
 	/**
 	 * @Tarea: listaEstacionesIgualNombre().
 	 * @Parametros: Diccionario Multiple
@@ -102,77 +101,76 @@ public class Metodos {
 	 * @Costo:
 	 **/
 	// NO COMPARA ESTACIONES, intentado pero fallido -------ver
-	
-	
-	static int cardinalidadConjunto(ConjuntoStringTDA clavesLineas){
+
+	static int cardinalidadConjunto(ConjuntoStringTDA clavesLineas) {
 		int cant = 0;
 		String valor;
-		while(!clavesLineas.ConjuntoVacio()){
-		valor = clavesLineas.Elegir();
-		clavesLineas.Sacar(valor);
-		cant++;
+		while (!clavesLineas.ConjuntoVacio()) {
+			valor = clavesLineas.Elegir();
+			clavesLineas.Sacar(valor);
+			cant++;
 		}
 		return cant;
-		}
-	
+	}
+
 	@SuppressWarnings("null")
 	public void listaEstacionesIgualNombre(DiccionarioMultipleStringTDA DM) {
 		ConjuntoStringTDA clavesLineas = null;
 		ConjuntoStringTDA valoresEstaciones = null;
 		ConjuntoStringTDA valoresEstacionesComp = null;
-		
 
-		DiccionarioSimpleStringTDA estacionesCoincidentesDS = new DiccionarioSimpleString();
-		estacionesCoincidentesDS.InicializarDiccionario();
+		DiccionarioMultipleStringTDA estacionesCoincidentesDM = new DiccionarioMultipleString();
+		estacionesCoincidentesDM.inicializarDiccionario();
 
 		String claveTemp = null;
 		String claveComparacion = null;
-		String estacionTemp=null;
+		String estacionTemp = null;
 		int i = 0;
 		clavesLineas = DM.claves();
 		clavesLineas.Sacar("Subte A");
 		clavesLineas.Sacar("Subte B");
 
+		//while (cardinalidadConjunto(clavesLineas) > 0) {
 
-	//	while(cardinalidadConjunto(clavesLineas)>0) {
-			
-			claveTemp=clavesLineas.Elegir();			//subte c
-			clavesLineas.Sacar(claveTemp);				//saco subte c del conjunto
-			while(!clavesLineas.ConjuntoVacio()) {			
-				claveComparacion = clavesLineas.Elegir();	//tren mitre
-				valoresEstaciones=DM.recuperar(claveTemp);	//retiro moreno diagonal
-				valoresEstacionesComp=DM.recuperar(claveComparacion); //retiro belgrano martinez
-					while(!valoresEstacionesComp.ConjuntoVacio()) {  
-						estacionTemp=valoresEstacionesComp.Elegir();  //retiro
-						if (valoresEstaciones.Pertenece(estacionTemp)) {	//si				
-							System.out.println(claveComparacion + "   EN:   " + estacionTemp);
-							String lineaCoincidente = claveTemp + " con " + claveComparacion; 
-							estacionesCoincidentesDS.Agregar(lineaCoincidente, estacionTemp);
-						}
-						valoresEstacionesComp.Sacar(estacionTemp);	//saco retiro y pruebo con moreno...
-					}				
-				
-				clavesLineas.Sacar(claveComparacion);  //Se va el tren mitre
-				
-			}	
-			
-			
-			//DM.eliminar(claveTemp);
-			//clavesLineas=DM.claves();
-			
+			claveTemp = clavesLineas.Elegir(); // subte c
+			clavesLineas.Sacar(claveTemp); // saco subte c del conjunto
+			while (!clavesLineas.ConjuntoVacio()) {
+				claveComparacion = clavesLineas.Elegir(); // tren mitre
+				valoresEstaciones = DM.recuperar(claveTemp); // retiro moreno diagonal
+				valoresEstacionesComp = DM.recuperar(claveComparacion); // retiro belgrano martinez
+				while (!valoresEstacionesComp.ConjuntoVacio()) {
+					estacionTemp = valoresEstacionesComp.Elegir(); // retiro
+					if (valoresEstaciones.Pertenece(estacionTemp)) { // si
+						System.out.println(claveComparacion + "   EN:   " + estacionTemp);
+						String lineaCoincidente = claveTemp + " con " + claveComparacion;
+						estacionesCoincidentesDM.agregar(lineaCoincidente, estacionTemp);
+					}
+					valoresEstacionesComp.Sacar(estacionTemp); // saco retiro y pruebo con moreno...
+				}
+
+				clavesLineas.Sacar(claveComparacion); // Se va el tren mitre
+
+			}
+
+			// DM.eliminar(claveTemp);
+			// clavesLineas=DM.claves();
+
 		//}
-		mostrarDiccionarioSimple(estacionesCoincidentesDS);					
+		mostrarDiccionarioMultiple(estacionesCoincidentesDM);
 	}
 
-	private void mostrarDiccionarioSimple(DiccionarioSimpleStringTDA DS) {
-		ConjuntoStringTDA clavesLineas = DS.Claves();
+	private void mostrarDiccionarioMultiple(DiccionarioMultipleStringTDA DM) {
+		ConjuntoStringTDA clavesLineas = DM.claves();
 		while (!clavesLineas.ConjuntoVacio()) {
 			String clave = clavesLineas.Elegir();
 			clavesLineas.Sacar(clave);
-			String estacion = DS.Recuperar(clave);
-			System.out.println("Lineas que coinciden: " + clave);
-			System.out.println("Nombre de estacion: " + estacion);
-			
+			ConjuntoStringTDA estaciones = DM.recuperar(clave);
+			while(!estaciones.ConjuntoVacio()) {
+				String estacion = estaciones.Elegir();
+				System.out.println("Lineas que coinciden: " + clave + "[]");
+				System.out.println("Nombre de estacion: " + estacion);
+				estaciones.Sacar(estacion);
+			}
 		}
 	}
 

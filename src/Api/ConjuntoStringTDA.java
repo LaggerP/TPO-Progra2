@@ -1,14 +1,14 @@
 /** 
- * @Autores: 
- * @Grupo: 
+ * @Autores: plagger, ncheheid, afierro
+ * @Grupo: 2
 **/
 
 /**
- * @TDA: 
- * @Definición: es una estructura que nos permite guardar elementos sin que los mismos
- * se repitan y en donde no se tiene un orden, y ademas nos permite conocer si
+ * @TDA: ConjuntoStringTDA
+ * @Definición: es una estructura que nos permite guardar elementos y en donde no se tiene un orden, y ademas nos permite conocer si
  * un elemento dado se encuentra o pertenece a la estructura.
  **/
+
 package Api;
 
 public interface ConjuntoStringTDA {
