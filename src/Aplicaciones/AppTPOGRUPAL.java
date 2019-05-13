@@ -1,5 +1,5 @@
 /** 
-	@Autores: plagger
+	@Autores: plagger, ncheheid
 	@Grupo: 
 **/
 
@@ -18,30 +18,33 @@ public class AppTPOGRUPAL {
 		DM.inicializarDiccionario();
 		DiccionarioMultipleStringTDA DM_porcentaje_estaciones = new DiccionarioMultipleString();
 		DM_porcentaje_estaciones.inicializarDiccionario();
-		entrada.CargarDMArch(DM,DM_porcentaje_estaciones);
+		DiccionarioMultipleStringTDA destinoEstacionesTranferencia = new DiccionarioMultipleString();
+		destinoEstacionesTranferencia.inicializarDiccionario();
+		entrada.CargarDMArch(DM, DM_porcentaje_estaciones, destinoEstacionesTranferencia);
 		Metodos m = new Metodos();
 
-		
 		System.out.println("<----EJERCICIO A---->");
 		// a. Cantidad de estaciones para cada una de las líneas
 		ConjuntoStringTDA cl = DM.claves(); // obtenemos el conjunto de claves de un diccionario multimple
-		//m.calcularCantidadEstaciones(cl, DM);
-		
+		m.calcularCantidadEstaciones(cl, DM);
+
 		System.out.println("<----EJERCICIO B---->");
-		
+
 		// b. Porcentaje de estaciones que tienen estaciones de transferencia por cada línea
 		ConjuntoStringTDA cl2 = DM_porcentaje_estaciones.claves(); // obtenemos el conjunto de claves de un diccionario simple
-		//m.porcentajeEstacionesTransferencia(DM, DM_porcentaje_estaciones, cl2);
-		
+		m.porcentajeEstacionesTransferencia(DM, DM_porcentaje_estaciones, cl2);
+
 		System.out.println("<----EJERCICIO C---->");
-		
-		// c. Lista de estaciones de igual nombre, indicando a que línea de subte o tren pertenece
+
+		// c. Lista de estaciones de igual nombre, indicando a que línea de subte o tren
+		// pertenece
 		m.listaEstacionesIgualNombre(DM);
 		
-		System.out.println("<----EJERCICIO D---->");
 		
 		// d. Lista de estaciones de transferencia en orden alfabético (nombre, línea a
 		// la cual pertenece) indicando cantidad de lineas posibles se puede combinar.
-		//m.ordenarListaTransferencia(DM,DS);
+		System.out.println("<----EJERCICIO D---->");
+		m.ordenarListaTransferencia(DM, destinoEstacionesTranferencia);
+
 	}
 }

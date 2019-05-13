@@ -1,12 +1,12 @@
 /** 
-	@Autores: plagger
-	@Grupo: 
+	@Autores: plagger, ncheheid
+	@Grupo: 2
 **/
 
 package Clases;
 
 /**
- * @Tarea:
+ * @Tarea: 
  * @Parámetros:
  * @Devuelve:
  * @Precondición:
