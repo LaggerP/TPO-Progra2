@@ -1,5 +1,5 @@
 /** 
- * @Autores: plagger, ncheheid, afierro
+ * @Autores: plagger, ncheheid
  * @Grupo: 2
 **/
 /**
