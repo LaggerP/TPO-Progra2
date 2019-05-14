@@ -141,7 +141,8 @@ public class Metodos {
 														// segundo diccionario
 					if (valores.Pertenece(valor2)) { // si el valor que elegimos esta en el conjunto de valores de una
 														// clave del primer diccionario, lo guardamos
-						String lineaCoincidente = "[Coinciden: " + clave + " con " + clave2 + "]--> ";
+						String lineaCoincidente = "[Coinciden: " + "'" + clave + "'" + " con " + "'" + clave2 + "'"
+								+ "]";
 
 						estacionesCoincidentesDM.agregar(lineaCoincidente, valor2);
 					}
@@ -172,12 +173,15 @@ public class Metodos {
 			String clave = clavesLineas.Elegir();
 			clavesLineas.Sacar(clave);
 			ConjuntoStringTDA estaciones = DM.recuperar(clave);
+			System.out.println(clave);
+			int cant = 1;
 			while (!estaciones.ConjuntoVacio()) {
 				String estacion = estaciones.Elegir();
-				System.out.println(clave + " Nombre de estacion: " + estacion);
-				System.out.println();
+				System.out.println("   "+cant+")" + "Nombre de estacion: " + estacion);
 				estaciones.Sacar(estacion);
+				cant++;
 			}
+			System.out.println();
 		}
 	}
 
