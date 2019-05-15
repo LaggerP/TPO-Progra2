@@ -17,16 +17,19 @@ public class ConjuntoString implements ConjuntoStringTDA {
 	nodo inicio;
 
 	@Override
+	/**Costo: C **/
 	public void InicializarConjunto() {
 		inicio = null;
 	}
 
 	@Override
+	/**Costo: C **/
 	public String Elegir() {
 		return inicio.valor;
 	}
 
 	@Override
+	/**Costo: Lineal **/
 	public void Sacar(String x) {
 		nodo actual = inicio, anterior = null;
 		while (actual != null && actual.valor.compareTo(x) != 0) {
@@ -43,6 +46,7 @@ public class ConjuntoString implements ConjuntoStringTDA {
 	}
 
 	@Override
+	/**Costo: Lineal **/
 	public void Agregar(String x) {
 		if (!Pertenece(x)) {
 			nodo nuevo = new nodo();
@@ -53,11 +57,13 @@ public class ConjuntoString implements ConjuntoStringTDA {
 	}
 
 	@Override
+	/**Costo: C **/
 	public boolean ConjuntoVacio() {
 		return inicio == null;
 	}
 
 	@Override
+	/**Costo: Lineal **/
 	public boolean Pertenece(String x) {
 		nodo actual = inicio;
 		while (actual != null && actual.valor.compareTo(x) != 0) {
@@ -65,5 +71,4 @@ public class ConjuntoString implements ConjuntoStringTDA {
 		}
 		return (actual != null);
 	}
-
 }

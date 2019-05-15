@@ -5,10 +5,10 @@
 
 package Clases;
 
-/**
- * @Tarea: 
- * @Parámetros:
- * @Devuelve:
+/** 
+ * @Tarea: Info
+ * @Parámetros: 
+ * @Devuelve: 
  * @Precondición:
  * @Postcondición:
  * @Costo:

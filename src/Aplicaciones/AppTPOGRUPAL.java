@@ -30,8 +30,10 @@ public class AppTPOGRUPAL {
 
 		System.out.println("<----EJERCICIO B---->");
 
-		// b. Porcentaje de estaciones que tienen estaciones de transferencia por cada línea
-		ConjuntoStringTDA cl2 = DM_porcentaje_estaciones.claves(); // obtenemos el conjunto de claves de un diccionario simple
+		// b. Porcentaje de estaciones que tienen estaciones de transferencia por cada
+		// línea
+		ConjuntoStringTDA cl2 = DM_porcentaje_estaciones.claves(); // obtenemos el conjunto de claves de un diccionario
+																	// simple
 		m.porcentajeEstacionesTransferencia(DM, DM_porcentaje_estaciones, cl2);
 
 		System.out.println("<----EJERCICIO C---->");
@@ -39,8 +41,7 @@ public class AppTPOGRUPAL {
 		// c. Lista de estaciones de igual nombre, indicando a que línea de subte o tren
 		// pertenece
 		m.listaEstacionesIgualNombre(DM);
-		
-		
+
 		// d. Lista de estaciones de transferencia en orden alfabético (nombre, línea a
 		// la cual pertenece) indicando cantidad de lineas posibles se puede combinar.
 		System.out.println("<----EJERCICIO D---->");

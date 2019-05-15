@@ -24,11 +24,13 @@ public class DiccionarioMultipleString implements DiccionarioMultipleStringTDA {
 	nodo inicio;
 
 	@Override
+	/**Costo: C **/
 	public void inicializarDiccionario() {
 		inicio = null;
 	}
 
 	@Override
+	/**Costo: Lineal**/
 	public void agregar(String c, String nuevoDato) {
 
 		// insertando valores que no estan
@@ -54,16 +56,18 @@ public class DiccionarioMultipleString implements DiccionarioMultipleStringTDA {
 		}
 	}
 
-	// retorna null si la clave no existe en la lista principal
+	/**Costo: Lineal **/
 	private nodo buscarClave(String c) {
+		// retorna null si la clave no existe en la lista principal
 		nodo actual = inicio;
 		while (actual != null && actual.clave.compareTo(c) != 0)
 			actual = actual.sig;
 		return actual;
 	}
-
-	// retorna null si el valor no existe en la lista secundaria
+	
+	/**Costo: Lineal **/
 	private nodoV buscarValor(nodoV inicioV, String nuevoDato) {
+		// retorna null si el valor no existe en la lista secundaria
 		nodoV actual = inicioV;
 		while (actual != null && actual.valor.compareTo(nuevoDato) != 0)
 			actual = actual.sig;
@@ -71,6 +75,7 @@ public class DiccionarioMultipleString implements DiccionarioMultipleStringTDA {
 	}
 
 	@Override
+	/**Costo: Lineal **/
 	public void eliminar(String c) {
 		if (inicio != null) {
 			if (inicio.clave == c)
@@ -85,6 +90,7 @@ public class DiccionarioMultipleString implements DiccionarioMultipleStringTDA {
 	}
 
 	@Override
+	/**Costo: Lineal **/
 	public ConjuntoStringTDA claves() {
 		ConjuntoStringTDA claves = new ConjuntoString();
 		claves.InicializarConjunto();
@@ -97,6 +103,7 @@ public class DiccionarioMultipleString implements DiccionarioMultipleStringTDA {
 	}
 
 	@Override
+	/**Costo: Cuadratica **/
 	public ConjuntoStringTDA recuperar(String c) {
 		nodo n = inicio;
 		while (n != null && n.clave.compareTo(c) != 0) {
@@ -115,6 +122,7 @@ public class DiccionarioMultipleString implements DiccionarioMultipleStringTDA {
 	}
 
 	@Override
+	/**Costo: Lineal**/
 	public void EliminarElem(String c, String dato) {
 		nodo posCl = buscarClave(c);
 		if (posCl != null) { // si la clave existe
