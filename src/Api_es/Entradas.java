@@ -21,7 +21,7 @@ public class Entradas {
 	 * @Devuelve: Diccionarios multiples con información obtenida de los archivos
 	 * @Precondición: Que existan los diccionarios multiples
 	 * @Postcondición:
-	 * @Costo:
+	 * @Costo: Cuadratica
 	 **/
 
 	public void CargarDMArch(DiccionarioMultipleStringTDA destino,
@@ -59,7 +59,7 @@ public class Entradas {
 						destino.agregar(clave, nuevo.nombre);
 						if (nuevo.lineaNombre.compareTo("") != 0) {
 							destinoPorcentajeEstaciones.agregar(clave, nuevo.lineaNombre); // ejercicio 2b)
-							destinoEstacionesTranferencia.agregar(clave, nuevo.estacionTransferencia);
+							destinoEstacionesTranferencia.agregar(nuevo.estacionTransferencia, clave);
 						}
 					}
 				}

@@ -5,11 +5,15 @@
 
 package Metodos;
 
+import Api.ABBTDA;
+import Api.ColaStringTDA;
 import Api.ConjuntoStringTDA;
 import Api.DiccionarioMultipleStringTDA;
 import Api.DiccionarioSimpleStringTDA;
+import Implementaciones.Dinamico.ABB;
 import Implementaciones.Dinamico.DiccionarioMultipleString;
 import Implementaciones.Dinamico.DiccionarioSimpleString;
+import Implementaciones.Estatico.ColaString;
 
 public class Metodos {
 
@@ -22,7 +26,7 @@ public class Metodos {
 	 * @Precondición: Que existe un diccionario multiple con valores asociadas a las
 	 *                claves
 	 * @Postcondición:
-	 * @Costo:
+	 * @Costo: Cuadratico
 	 **/
 	public void calcularCantidadEstaciones(ConjuntoStringTDA cl, DiccionarioMultipleStringTDA DM) {
 		int cantEstaciones = 1;
@@ -30,7 +34,7 @@ public class Metodos {
 		while (!cl.ConjuntoVacio()) {
 			String claveUnitaria = cl.Elegir(); // elegimos una clave al azar
 			val = DM.recuperar(claveUnitaria); // recuperamos los valores asociados a clave
-			System.out.println(claveUnitaria); // mostramos la clave
+			System.out.print(claveUnitaria + "\t"); // mostramos la clave
 			while (!val.ConjuntoVacio()) {
 				String valorUnitario = val.Elegir(); // elegimos un valor al azar asociado a la clave
 				cantEstaciones++;
@@ -38,9 +42,8 @@ public class Metodos {
 			}
 			// tener en cuenta que la cantidad de estaciones que se muestran
 			// son las totales dejando de lado las que se repiten.
-			System.out.print(" Cantidad de estaciones: " + cantEstaciones);
-			System.out.println();
-			System.out.println();
+			System.out.print(" estaciones: " + cantEstaciones);
+			System.out.println("");
 			cl.Sacar(claveUnitaria);
 			cantEstaciones = 0;
 		}
@@ -55,7 +58,7 @@ public class Metodos {
 	 * @Precondición: Que existe un diccionario simple con valores asociadas a las
 	 *                claves
 	 * @Postcondición:
-	 * @Costo:
+	 * @Costo: Cuadratica
 	 **/
 	public void porcentajeEstacionesTransferencia(DiccionarioMultipleStringTDA DM,
 			DiccionarioMultipleStringTDA porcentajEstaciones, ConjuntoStringTDA cl2) {
@@ -88,7 +91,7 @@ public class Metodos {
 	 * @Precondición: Que existe un diccionario simple con valores asociadas a las
 	 *                claves
 	 * @Postcondición:
-	 * @Costo:
+	 * @Costo: Lineal
 	 **/
 	private int calculoTotalEstacionesPorLinea(DiccionarioMultipleStringTDA DM, String claveObtenida) {
 		int cantEstaciones = 0;
@@ -111,9 +114,8 @@ public class Metodos {
 	 * @Precondicion: Que existe un diccionario multiple con valores asociadas a las
 	 *                claves
 	 * @Postcondicion:
-	 * @Costo:
+	 * @Costo: Polinomico
 	 **/
-
 	public void listaEstacionesIgualNombre(DiccionarioMultipleStringTDA DM) {
 
 		ConjuntoStringTDA clavesAux = DM.claves();
@@ -165,7 +167,7 @@ public class Metodos {
 	 * @Precondicion: Que existe un diccionario multiple con valores asociadas a las
 	 *                claves
 	 * @Postcondicion:
-	 * @Costo:
+	 * @Costo: Cuadratico
 	 **/
 	private void mostrarDiccionarioMultiple(DiccionarioMultipleStringTDA DM) {
 		ConjuntoStringTDA clavesLineas = DM.claves();
@@ -177,7 +179,7 @@ public class Metodos {
 			int cant = 1;
 			while (!estaciones.ConjuntoVacio()) {
 				String estacion = estaciones.Elegir();
-				System.out.println("   "+cant+")" + "Nombre de estacion: " + estacion);
+				System.out.println("   " + cant + ")" + "Nombre de estacion: " + estacion);
 				estaciones.Sacar(estacion);
 				cant++;
 			}
@@ -193,49 +195,86 @@ public class Metodos {
 	 * @Precondicion: Que existan diccionarios multiples con valores asociados a la
 	 *                clave
 	 * @Postcondicion:
-	 * @Costo:
+	 * @Costo: Polinomico
 	 **/
-
 	public void ordenarListaTransferencia(DiccionarioMultipleStringTDA DM,
 			DiccionarioMultipleStringTDA DM_estacionesT) {
-		ConjuntoStringTDA clavesAux = DM.claves();
-		ConjuntoStringTDA clavesLineasEstaciones = DM.claves();
-		ConjuntoStringTDA clavesLineasTransferencia = DM_estacionesT.claves();
+		ABBTDA arbol = new ABB();
+		arbol.inicializarArbol();
 
-		DiccionarioMultipleStringTDA estacionesTransferenciaDM = new DiccionarioMultipleString();
-		estacionesTransferenciaDM.inicializarDiccionario();
+		ConjuntoStringTDA clavesT = DM_estacionesT.claves();
 
-		while (!clavesAux.ConjuntoVacio()) {
-			String clave = clavesLineasEstaciones.Elegir(); // elegimos una clave del primer diccionario
-			clavesLineasEstaciones.Sacar(clave); // sacamos la clave de ese diccionario
-			ConjuntoStringTDA valores = DM.recuperar(clave); // recuperamos los valores asociados a ese clave del primer
-																// diccionario
+		DiccionarioMultipleStringTDA agregarDM_transferencia = new DiccionarioMultipleString();
+		agregarDM_transferencia.inicializarDiccionario();
 
-			clavesLineasTransferencia.Sacar(clave); // eliminamos la clave en el segundo diccionario para no comparar
-													// con mismos valores
-			while (!clavesLineasTransferencia.ConjuntoVacio()) {
-				String clave2 = clavesLineasTransferencia.Elegir(); // elegimos una clave del segundo diccionario
-				ConjuntoStringTDA valores2 = DM_estacionesT.recuperar(clave2); // recuperamos el conjunto de valores
-																				// asociados a la clave del segundo
-																				// diccionario
-
-				while (!valores2.ConjuntoVacio()) {
-					String valor2 = valores2.Elegir(); // elegimos un valor del conjunto de valores de una clave del
-														// segundo diccionario
-					if (valores.Pertenece(valor2)) { // si el valor que elegimos esta en el conjunto de valores de una
-														// clave del primer diccionario, lo guardamos
-
-						String est_transferencia = "[" + clave + " <-> " + clave2 + "]";
-						estacionesTransferenciaDM.agregar(est_transferencia, valor2);
-					}
-					valores2.Sacar(valor2); // sacamos el valor del conjunto de valores del segundo diccionario
-				}
-				clavesLineasTransferencia.Sacar(clave2); // sacamos la clave del segundo diccionario
-			}
-			clavesLineasTransferencia = DM.claves(); // volvemos completar con TODAS las claves al segundo diccionario
-			clavesAux.Sacar(clave); // eliminamos la clave que usamos para comparar del conjunto de claves que
-									// funciona como flag.
+		while (!clavesT.ConjuntoVacio()) {
+			String clave = clavesT.Elegir();
+			arbol.agregar(clave);
+			clavesT.Sacar(clave);
 		}
-		mostrarDiccionarioMultiple(estacionesTransferenciaDM);
+
+		ColaStringTDA cola = new ColaString();
+		cola.InicializarCola();
+		colaClaves(arbol, cola);
+
+		while (!cola.ColaVacia()) {
+			String nombreEstacionTransferencia = cola.Primero();
+			cola.Desacolar();
+			ConjuntoStringTDA valoresEstacionTransferencia = DM_estacionesT.recuperar(nombreEstacionTransferencia);
+
+			ConjuntoStringTDA clavesDM = DM.claves();
+			while (!clavesDM.ConjuntoVacio()) {
+				String valorClave = clavesDM.Elegir();
+				if (valoresEstacionTransferencia.Pertenece(valorClave))
+					agregarDM_transferencia.agregar(nombreEstacionTransferencia, valorClave);
+				clavesDM.Sacar(valorClave);
+			}
+		}
+		mostrarDiccionario(agregarDM_transferencia);
+	}
+
+	/**
+	 * @Tarea: colaClaves(). Coloca los valores de un arbol en una cola
+	 * @Parámetros: el arbol en cuestion y una cola
+	 * @Devuelve: cola con todos los valores del arbol
+	 * @Precondición: Que exista un arbol y una cola
+	 * @Postcondición:
+	 * @Costo: C
+	 **/
+	private void colaClaves(ABBTDA a, ColaStringTDA c) {
+		if (!a.arbolVacio()) {
+			colaClaves(a.hijoIzq(), c);
+			c.Acolar(a.raiz());
+			colaClaves(a.hijoDer(), c);
+
+		}
+	}
+
+	/**
+	 * @Tarea: mostrarDiccionario(). Muestra el diccionario generado
+	 * @Parámetros: Diccionario Multiple
+	 * @Devuelve: Muestra por pantalla los valores asociados a cada clave
+	 * @Precondición: Que existe un diccionario multiple con valores asociadas a las
+	 *                claves
+	 * @Postcondición:
+	 * @Costo: Cuadratica
+	 **/
+	private void mostrarDiccionario(DiccionarioMultipleStringTDA DM) {
+		ConjuntoStringTDA claves = DM.claves();
+		while (!claves.ConjuntoVacio()) {
+			String clave = claves.Elegir();
+			ConjuntoStringTDA valores = DM.recuperar(clave);
+			System.out.println(clave + ":");
+			int cant = 0;
+			while (!valores.ConjuntoVacio()) {
+				cant++;
+				String valor = valores.Elegir();
+				System.out.println("-->" + valor);
+				valores.Sacar(valor);
+			}
+			System.out.println("Cantidad de lineas posibles a realizar en linea " + clave + ": " + cant);
+			System.out.println("");
+			claves.Sacar(clave);
+		}
 	}
 }

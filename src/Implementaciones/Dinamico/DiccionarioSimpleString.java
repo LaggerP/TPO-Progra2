@@ -19,11 +19,13 @@ public class DiccionarioSimpleString implements DiccionarioSimpleStringTDA {
 	NodoCl iniCl;
 
 	@Override
+	/**Costo: C **/
 	public void InicializarDiccionario() {
 		iniCl = null;
 	}
 
 	@Override
+	/**Costo: Lineal **/
 	public void Agregar(String c, String valor) {
 		NodoCl nuevo;
 		nuevo = new NodoCl();
@@ -40,6 +42,7 @@ public class DiccionarioSimpleString implements DiccionarioSimpleStringTDA {
 	}
 
 	@Override
+	/**Costo: Lineal **/
 	public void Eliminar(String c) {
 		if (iniCl != null) {
 			if (iniCl.clave == c) {
@@ -57,6 +60,7 @@ public class DiccionarioSimpleString implements DiccionarioSimpleStringTDA {
 	}
 
 	@Override
+	/**Costo: Lineal **/
 	public String Recuperar(String c) {
 		NodoCl claveBuscada = iniCl;
 		while (claveBuscada != null && claveBuscada.clave.compareTo(c) != 0) {
@@ -66,6 +70,7 @@ public class DiccionarioSimpleString implements DiccionarioSimpleStringTDA {
 	}
 
 	@Override
+	/**Costo: Lineal **/
 	public ConjuntoStringTDA Claves() {
 		ConjuntoStringTDA claves = new ConjuntoString();
 		claves.InicializarConjunto();
