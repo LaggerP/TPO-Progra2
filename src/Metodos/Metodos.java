@@ -31,10 +31,11 @@ public class Metodos {
 	public void calcularCantidadEstaciones(ConjuntoStringTDA cl, DiccionarioMultipleStringTDA DM) {
 		int cantEstaciones = 1;
 		ConjuntoStringTDA val = null;
+		System.out.println("Cantidad de estaciones en cada linea:");
 		while (!cl.ConjuntoVacio()) {
 			String claveUnitaria = cl.Elegir(); // elegimos una clave al azar
 			val = DM.recuperar(claveUnitaria); // recuperamos los valores asociados a clave
-			System.out.print(claveUnitaria + "\t"); // mostramos la clave
+			System.out.print(claveUnitaria ); // mostramos la clave
 			while (!val.ConjuntoVacio()) {
 				String valorUnitario = val.Elegir(); // elegimos un valor al azar asociado a la clave
 				cantEstaciones++;
@@ -42,11 +43,12 @@ public class Metodos {
 			}
 			// tener en cuenta que la cantidad de estaciones que se muestran
 			// son las totales dejando de lado las que se repiten.
-			System.out.print(" estaciones: " + cantEstaciones);
+			System.out.print(": " + cantEstaciones);
 			System.out.println("");
 			cl.Sacar(claveUnitaria);
 			cantEstaciones = 0;
 		}
+		System.out.println("");
 	}
 
 	/**
@@ -65,6 +67,7 @@ public class Metodos {
 		DiccionarioSimpleStringTDA DSValores = new DiccionarioSimpleString();
 		DSValores.InicializarDiccionario();
 		int cant = 1;
+		System.out.println("Porcentaje de estaciones de transferencia de cada linea: ");
 		while (!cl2.ConjuntoVacio()) {
 			String claveObtenida = cl2.Elegir();
 			ConjuntoStringTDA valoresObtenido = porcentajEstaciones.recuperar(claveObtenida);
@@ -75,11 +78,11 @@ public class Metodos {
 			}
 			float cantLineasTotal = calculoTotalEstacionesPorLinea(DM, claveObtenida);
 			float porcentaje = ((cant * 100) / cantLineasTotal);
-			System.out.println("Porcentaje de estaciones de transferencia de la linea: " + claveObtenida + " es "
-					+ porcentaje + "%");
+			System.out.println(claveObtenida + ": " + porcentaje + "%");
 			cl2.Sacar(claveObtenida);
 			cant = 0;
 		}
+		System.out.println("");
 	}
 
 	/**
@@ -143,8 +146,7 @@ public class Metodos {
 														// segundo diccionario
 					if (valores.Pertenece(valor2)) { // si el valor que elegimos esta en el conjunto de valores de una
 														// clave del primer diccionario, lo guardamos
-						String lineaCoincidente = "[Coinciden: " + "'" + clave + "'" + " con " + "'" + clave2 + "'"
-								+ "]";
+						String lineaCoincidente = "'" + clave + "'" + " con " + "'" + clave2 + "':";
 
 						estacionesCoincidentesDM.agregar(lineaCoincidente, valor2);
 					}
@@ -179,7 +181,7 @@ public class Metodos {
 			int cant = 1;
 			while (!estaciones.ConjuntoVacio()) {
 				String estacion = estaciones.Elegir();
-				System.out.println("   " + cant + ")" + "Nombre de estacion: " + estacion);
+				System.out.println("   " + cant + ") " +  estacion);
 				estaciones.Sacar(estacion);
 				cant++;
 			}
@@ -269,10 +271,10 @@ public class Metodos {
 			while (!valores.ConjuntoVacio()) {
 				cant++;
 				String valor = valores.Elegir();
-				System.out.println("-->" + valor);
+				System.out.println("-" + valor);
 				valores.Sacar(valor);
 			}
-			System.out.println("Cantidad de lineas posibles a realizar en linea " + clave + ": " + cant);
+			System.out.println("Transferencias posibles en " + clave + ": " + cant);
 			System.out.println("");
 			claves.Sacar(clave);
 		}
