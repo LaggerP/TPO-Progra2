@@ -146,9 +146,14 @@ public class Metodos {
 														// segundo diccionario
 					if (valores.Pertenece(valor2)) { // si el valor que elegimos esta en el conjunto de valores de una
 														// clave del primer diccionario, lo guardamos
-						String lineaCoincidente = "'" + clave + "'" + " con " + "'" + clave2 + "':";
+						
+						
+						//CODIGO MODIFICADO
+						//String lineaCoincidente = "'" + clave + "'" + " y " + "'" + clave2 + "',";
 
-						estacionesCoincidentesDM.agregar(lineaCoincidente, valor2);
+						//estacionesCoincidentesDM.agregar(lineaCoincidente, valor2);
+						//FIN CODIGO MODIFICADO
+						estacionesCoincidentesDM.agregar(valor2, clave);
 					}
 					valores2.Sacar(valor2); // sacamos el valor del conjunto de valores del segundo diccionario
 				}
@@ -177,7 +182,7 @@ public class Metodos {
 			String clave = clavesLineas.Elegir();
 			clavesLineas.Sacar(clave);
 			ConjuntoStringTDA estaciones = DM.recuperar(clave);
-			System.out.println(clave);
+			System.out.println("La estacion " + clave + " pertenece a la(s) siguiente(s) linea(s) de igual nombre:");
 			int cant = 1;
 			while (!estaciones.ConjuntoVacio()) {
 				String estacion = estaciones.Elegir();
@@ -248,7 +253,6 @@ public class Metodos {
 			colaClaves(a.hijoIzq(), c);
 			c.Acolar(a.raiz());
 			colaClaves(a.hijoDer(), c);
-
 		}
 	}
 
