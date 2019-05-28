@@ -11,6 +11,7 @@ import Api.ConjuntoStringTDA;
 import Api.DiccionarioMultipleStringTDA;
 import Api.DiccionarioSimpleStringTDA;
 import Implementaciones.Dinamico.ABB;
+import Implementaciones.Dinamico.ConjuntoString;
 import Implementaciones.Dinamico.DiccionarioMultipleString;
 import Implementaciones.Dinamico.DiccionarioSimpleString;
 import Implementaciones.Estatico.ColaString;
@@ -29,7 +30,7 @@ public class Metodos {
 	 * @Costo: Cuadratico
 	 **/
 	public void calcularCantidadEstaciones(ConjuntoStringTDA cl, DiccionarioMultipleStringTDA DM) {
-		int cantEstaciones = 1;
+		int cantEstaciones = 0;
 		ConjuntoStringTDA val = null;
 		System.out.println("Cantidad de estaciones en cada linea:");
 		while (!cl.ConjuntoVacio()) {
@@ -62,27 +63,26 @@ public class Metodos {
 	 * @Postcondición:
 	 * @Costo: Cuadratica
 	 **/
-	public void porcentajeEstacionesTransferencia(DiccionarioMultipleStringTDA DM,
-			DiccionarioMultipleStringTDA porcentajEstaciones, ConjuntoStringTDA cl2) {
-		DiccionarioSimpleStringTDA DSValores = new DiccionarioSimpleString();
-		DSValores.InicializarDiccionario();
-		int cant = 1;
-		System.out.println("Porcentaje de estaciones de transferencia de cada linea: ");
-		while (!cl2.ConjuntoVacio()) {
-			String claveObtenida = cl2.Elegir();
-			ConjuntoStringTDA valoresObtenido = porcentajEstaciones.recuperar(claveObtenida);
-			while (!valoresObtenido.ConjuntoVacio()) {
-				String valor = valoresObtenido.Elegir();
+	
+	public void porcentajeEstacionesTransferencia(DiccionarioMultipleStringTDA DM, DiccionarioMultipleStringTDA porcentajEstaciones) {
+		ConjuntoStringTDA claves = porcentajEstaciones.claves();
+		int cant = 0;
+		while(!claves.ConjuntoVacio()) {
+			String clave = claves.Elegir();
+			ConjuntoStringTDA valores = porcentajEstaciones.recuperar(clave);
+			while(!valores.ConjuntoVacio()) {
+				String valor = valores.Elegir();
+				System.out.print("- "+valor);
 				cant++;
-				valoresObtenido.Sacar(valor);
+				valores.Sacar(valor);
 			}
-			float cantLineasTotal = calculoTotalEstacionesPorLinea(DM, claveObtenida);
+			System.out.println(cant);
+			float cantLineasTotal = calculoTotalEstacionesPorLinea(DM, clave); //el valor que devuelve no posee estaciones repetidas
 			float porcentaje = ((cant * 100) / cantLineasTotal);
-			System.out.println(claveObtenida + ": " + porcentaje + "%");
-			cl2.Sacar(claveObtenida);
+			System.out.println(clave + ": " + porcentaje + "%");
+			claves.Sacar(clave);
 			cant = 0;
 		}
-		System.out.println("");
 	}
 
 	/**
@@ -183,12 +183,10 @@ public class Metodos {
 			clavesLineas.Sacar(clave);
 			ConjuntoStringTDA estaciones = DM.recuperar(clave);
 			System.out.println("La estacion " + clave + " pertenece a la(s) siguiente(s) linea(s) de igual nombre:");
-			int cant = 1;
 			while (!estaciones.ConjuntoVacio()) {
 				String estacion = estaciones.Elegir();
-				System.out.println("   " + cant + ") " +  estacion);
+				System.out.println("   -" + estacion);
 				estaciones.Sacar(estacion);
-				cant++;
 			}
 			System.out.println();
 		}

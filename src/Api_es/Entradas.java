@@ -58,7 +58,7 @@ public class Entradas {
 						// si el sentido NO esta vacio se agrega al diccionario multiple.
 						destino.agregar(clave, nuevo.nombre);
 						if (nuevo.lineaNombre.compareTo("") != 0) {
-							destinoPorcentajeEstaciones.agregar(clave, nuevo.lineaNombre); // ejercicio 2b)
+							destinoPorcentajeEstaciones.agregar(clave, nuevo.nombre); // ejercicio 2b)
 							destinoEstacionesTranferencia.agregar(nuevo.estacionTransferencia, clave);
 						}
 					}

@@ -32,9 +32,7 @@ public class AppTPOGRUPAL {
 
 		// b. Porcentaje de estaciones que tienen estaciones de transferencia por cada
 		// línea
-		ConjuntoStringTDA cl2 = DM_porcentaje_estaciones.claves(); // obtenemos el conjunto de claves de un diccionario
-																	// simple
-		m.porcentajeEstacionesTransferencia(DM, DM_porcentaje_estaciones, cl2);
+		m.porcentajeEstacionesTransferencia(DM, DM_porcentaje_estaciones);
 
 		System.out.println("<----EJERCICIO C---->");
 
